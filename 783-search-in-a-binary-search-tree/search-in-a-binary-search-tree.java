@@ -19,9 +19,10 @@ class Solution {
         stack.push(root);
         while(!stack.isEmpty()) {
             TreeNode temp = stack.pop();
-            if(temp.val == val) return temp;
-            if (temp.left != null) stack.add(temp.left);
-            if (temp.right != null) stack.add(temp.right);
+            if (temp == null) return null;
+            if (temp.val == val) return temp;
+            if (temp.val > val) stack.add(temp.left);
+            if (temp.val < val) stack.add(temp.right);
         }
         return null;
     }
