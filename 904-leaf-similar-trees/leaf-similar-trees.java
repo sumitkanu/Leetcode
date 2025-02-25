@@ -19,21 +19,12 @@ class Solution {
         List<Integer> arr2 = new ArrayList<>();
         leafList(root1, arr1);
         leafList(root2, arr2);
-        for(int num: arr1){
-            System.out.println(num);
-        }
-        for(int num: arr2){
-            System.out.println(num);
-        }
 
         if(arr1.size() != arr2.size()) return false;
 
-        System.out.print("Here");
         for(int i=0; i<arr1.size(); i++) {
             if (!arr1.get(i).equals(arr2.get(i))) return false;
         }
-
-        System.out.print("Here1");
 
         return true;
     }
