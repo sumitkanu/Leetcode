@@ -20,13 +20,7 @@ class Solution {
         leafList(root1, arr1);
         leafList(root2, arr2);
 
-        if(arr1.size() != arr2.size()) return false;
-
-        for(int i=0; i<arr1.size(); i++) {
-            if (!arr1.get(i).equals(arr2.get(i))) return false;
-        }
-
-        return true;
+        return arr1.equals(arr2);
     }
 
     private void leafList(TreeNode root, List<Integer> list) {
