@@ -1,29 +1,20 @@
 class Solution {
     public int longestOnes(int[] nums, int k) {
-        int left = 0;
-        int right = 0;
-        int cnt0 = 0;
-
-        while(right < nums.length) {
-            // System.out.println(left);
-            // System.out.println(right);
-            // System.out.println(cnt0);
-            // System.out.println("-----------");
-            if(nums[right] == 1 && cnt0<=k) {
-                right++;
-            } else {
-                if(cnt0 < k) {
-                    right++;
-                    cnt0++;
-                } else {
-                    if (nums[left] == 0) cnt0--;
-                    if (nums[right] == 0)cnt0++;
-                    left++;
-                    right++;
-                }
+        int left = 0, right;
+        for (right = 0; right < nums.length; right++) {
+            // If we included a zero in the window we reduce the value of k.
+            // Since k is the maximum zeros allowed in a window.
+            if (nums[right] == 0) {
+                k--;
             }
-        }
-
-        return right-left;
+            // A negative k denotes we have consumed all allowed flips and window has
+            // more than allowed zeros, thus increment left pointer by 1 to keep the window size same.
+            if (k < 0) {
+                // If the left element to be thrown out is zero we increase k.
+                k += 1 - nums[left];
+                left++;
+            }
+        }     
+        return right - left;
     }
 }
