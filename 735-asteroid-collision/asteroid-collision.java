@@ -22,10 +22,9 @@ class Solution {
         }
 
         int[] ans = new int[stack.size()];
-        int i = 0;
-        for(int element : stack) {
-            ans[i] = element;
-            i++;
+        for (int i = ans.length - 1; i >= 0; i--) {
+            ans[i] = stack.peek();
+            stack.pop();
         }
 
         return ans;
