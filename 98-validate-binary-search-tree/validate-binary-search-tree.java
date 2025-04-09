@@ -14,17 +14,37 @@
  * }
  */
 class Solution {
-    public boolean isValidBST(TreeNode root) {
-        return dfs(root, null, null);
+    private Deque<TreeNode> stack = new LinkedList<>();
+    private Deque<Integer> upperLimits = new LinkedList<>();
+    private Deque<Integer> lowerLimits = new LinkedList<>();
+
+    public void update(TreeNode root, Integer low, Integer high) {
+        stack.add(root);
+        lowerLimits.add(low);
+        upperLimits.add(high);
     }
 
-    private boolean dfs(TreeNode root, Integer min, Integer max) {
-        if(root==null) return true;
+    public boolean isValidBST(TreeNode root) {
+        Integer low = null, high = null, val;
+        update(root,low,high);
 
-        if((min != null && root.val <= min) || (max != null && root.val >= max)) return false;
+        while(!stack.isEmpty()) {
+            root = stack.poll();
+            low = lowerLimits.poll();
+            high = upperLimits.poll();
 
-        return (
-            dfs(root.left, min, root.val) && dfs(root.right, root.val, max)
-        );
+            if (root == null) continue;
+            if (low != null && root.val <= low) {
+                return false;
+            }
+            if (high != null && root.val >= high) {
+                return false;
+            }
+
+            update(root.left, low, root.val);
+            update(root.right, root.val, high);
+        }
+
+        return true;
     }
 }
