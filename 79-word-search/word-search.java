@@ -20,12 +20,6 @@ class Solution {
 
         found = valid(board, word, n+1, x+1, y) || valid(board, word, n+1, x-1, y) ||
                 valid(board, word, n+1, x, y+1) || valid(board, word, n+1, x, y-1);
-
-        if(found) {
-            System.out.print(x);
-            System.out.print(" ");
-            System.out.println(y);
-        }
         
         board[x][y] = temp;
 
