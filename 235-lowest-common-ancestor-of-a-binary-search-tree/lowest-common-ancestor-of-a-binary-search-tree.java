@@ -19,11 +19,7 @@ class Solution {
         if(p.val < root.val && q.val < root.val) return dfs(root.left,p,q);
         else if(p.val > root.val && q.val > root.val) return dfs(root.right,p,q);
         else{
-            TreeNode pval = dfs(root.left,p,q);
-            TreeNode qval = dfs(root.right,p,q);
-
-            if(pval !=  null && qval != null) return root;
-            else return pval != null ? pval : qval;
+            return root;
         }
     }
 }
