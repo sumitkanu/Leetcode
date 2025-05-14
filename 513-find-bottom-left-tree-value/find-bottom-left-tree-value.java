@@ -20,9 +20,7 @@ class Solution {
         int val = root.val;
 
         while(!q.isEmpty()) {
-            System.out.print(q.peek().val);
             int len = q.size();
-            System.out.println(len);
             val = q.peek().val;
             for(int i = 0; i<len ;i++) {
                 TreeNode node = q.poll();
