@@ -9,7 +9,6 @@ class Solution {
         }
 
         for(int val : map.values()) {
-            System.out.println(val);
             while(val > 0 && mapInt.containsKey(val)) {
                 val--;
                 count++;
