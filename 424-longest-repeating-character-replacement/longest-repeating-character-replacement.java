@@ -1,26 +1,21 @@
 class Solution {
     public int characterReplacement(String s, int k) {
-        int start = 0;
-        int[] frequencyMap = new int[26];
-        int maxFrequency = 0;
-        int longestSubstringLength = 0;
+        int left = 0, right = 0, maxFreq = 0, maxLen = 0;
+        int[] freq = new int[26];
 
-        for (int end = 0; end < s.length(); end += 1) {
-            int currentChar = s.charAt(end) - 'A';
+        while (right < s.length()) {
+            char c = s.charAt(right);
+            freq[c - 'A']++;
+            maxFreq = Math.max(maxFreq, freq[c - 'A']);
 
-            frequencyMap[currentChar] += 1;
-            maxFrequency = Math.max(maxFrequency, frequencyMap[currentChar]);
-
-            Boolean isValid = (end + 1 - start - maxFrequency <= k);
-            if (!isValid) {
-                int outgoingChar = s.charAt(start) - 'A';
-                frequencyMap[outgoingChar] -= 1;
-                start += 1;
+            while ((right - left + 1) - maxFreq > k) {
+                freq[s.charAt(left) - 'A']--;
+                left++;
             }
 
-            longestSubstringLength = end + 1 - start;
+            maxLen = Math.max(maxLen, right - left + 1);
+            right++;
         }
-
-        return longestSubstringLength;
+        return maxLen;
     }
 }
