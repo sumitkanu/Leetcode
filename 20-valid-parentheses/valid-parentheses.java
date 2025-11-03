@@ -1,24 +1,32 @@
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 class Solution {
     public boolean isValid(String s) {
-        Stack<Character> stack = new Stack<>();
-        for(int i = 0; i<=s.length()-1; i++){
-            if(s.charAt(i) == '(' || s.charAt(i) == '{' ||s.charAt(i) == '['){
-                stack.push(s.charAt(i));
-            } else if(s.charAt(i) == ')') {
-                if(stack.empty() || stack.pop() != '('){
+        int n = s.length();
+        if ((n & 1) == 1) return false; // odd length can't be balanced
+
+        Deque<Character> stack = new ArrayDeque<>(n);
+        for (int i = 0; i < n; i++) {
+            char c = s.charAt(i);
+            switch (c) {
+                case '(': case '{': case '[':
+                    stack.push(c);
+                    break;
+                case ')':
+                    if (stack.isEmpty() || stack.pop() != '(') return false;
+                    break;
+                case '}':
+                    if (stack.isEmpty() || stack.pop() != '{') return false;
+                    break;
+                case ']':
+                    if (stack.isEmpty() || stack.pop() != '[') return false;
+                    break;
+                default:
+                    // If inputs are guaranteed to be only (){}[], you can omit this.
                     return false;
-                }
-            } else if(s.charAt(i) == '}') {
-                if(stack.empty() || stack.pop() != '{'){
-                    return false;
-                }
-            } else if(s.charAt(i) == ']') {
-                if(stack.empty() || stack.pop() != '['){
-                    return false;
-                }
             }
         }
-        if(stack.empty()) return true;
-        return false;
+        return stack.isEmpty();
     }
 }
