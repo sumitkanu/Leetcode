@@ -1,14 +1,13 @@
 class Solution:
     def mergeAlternately(self, word1: str, word2: str) -> str:
-        res = []
-        i = 0
-
-        while i < len(word1) and i < len(word2):
-            res.append(word1[i])
-            res.append(word2[i])
-            i += 1
-
-        res.append(word1[i:])
-        res.append(word2[i:])
-        
-        return "".join(res)
+        i=j=0
+        r=[]
+        while i<len(word1) or j<len(word2):
+            if i<len(word1):
+                r.append(word1[i])
+                i+=1
+            if j<len(word2):
+                r.append(word2[j])
+                j+=1
+        result="".join(r)
+        return result
