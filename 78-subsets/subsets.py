@@ -1,18 +1,15 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        tot = []
+        res = []
         sub = []
 
-        def backtrack(pos):
-            if pos == len(nums):
-                tot.append(sub[:])
-                return
+        def backtrack(start: int):
+            res.append(sub[:])  # record current subset (copy!)
 
-            sub.append(nums[pos])
-            backtrack(pos + 1)
-            sub.pop()
-            backtrack(pos + 1)
-            return
+            for i in range(start, len(nums)):
+                sub.append(nums[i])     # choose
+                backtrack(i + 1)        # explore
+                sub.pop()               # undo
 
         backtrack(0)
-        return tot
+        return res
