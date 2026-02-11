@@ -1,8 +1,6 @@
 class Solution:
     def subsetXORSum(self, nums: List[int]) -> int:
-        def dfs(i, curr_xor):
-            if i == len(nums):
-                return curr_xor
-            return dfs(i + 1, curr_xor) + dfs(i + 1, curr_xor ^ nums[i])
-
-        return dfs(0, 0)
+        or_all = 0
+        for x in nums:
+            or_all |= x
+        return or_all * (1 << (len(nums) - 1))
