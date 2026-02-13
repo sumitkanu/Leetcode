@@ -6,6 +6,7 @@ class Solution:
         def comb(pos):
             if len(sub) == k:
                 res.append(sub[:])
+                return
 
             if len(sub) > k:
                 return
