@@ -8,11 +8,12 @@ class Solution:
                 res.append(sub[:])
                 return
 
-            if len(sub) > k:
-                return
+            
 
             for i in range(pos, n + 1):
                 sub.append(i)
+                if len(sub) > k:
+                    return
                 comb(i + 1)
                 sub.pop()
 
