@@ -5,5 +5,5 @@ class Solution:
             for j in strs[1:]:
                 if i >= len(j) or char != j[i]:
                     return strs[0][: i]
-        
+
         return strs[0]
