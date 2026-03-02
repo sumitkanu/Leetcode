@@ -1,16 +1,11 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        ana = {}
-        ans = []
+        groups = defaultdict(list)
 
         for s in strs:
-            key = "".join(sorted(s))
-            if key in ana.keys():
-                ana[key].append(s)
-            else:
-                ana[key] = [s]
+            val = [0]*26
+            for ch in s:
+                val[(ord(ch) - ord('a'))] += 1
+            groups[tuple(val)].append(s)
 
-        for k in ana.keys():
-            ans.append(ana[k])
-
-        return ans
+        return list(groups.values())
