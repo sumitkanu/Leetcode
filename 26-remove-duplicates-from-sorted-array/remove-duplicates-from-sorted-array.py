@@ -8,9 +8,7 @@ class Solution:
             if nums[i] == nums[k]:
                 continue
             
-            temp = nums[i]
-            nums[i] = nums[k+1]
-            nums[k+1] = temp
+            nums[k+1] = nums[i]
 
             k += 1
         
