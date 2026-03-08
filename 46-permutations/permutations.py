@@ -4,8 +4,6 @@ class Solution:
         used = [False]*len(nums)
 
         def bt(path, used):
-            print(used)
-            print(path)
             if len(path) == len(nums):
                 ans.append(path[:])
                 return
