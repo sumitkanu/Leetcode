@@ -5,10 +5,11 @@ class Solution:
         curr = []
 
         def bt(start):
-            if curr not in ans:
-                ans.append(curr[:])
+            ans.append(curr[:])
 
             for i in range(start, len(nums)):
+                if i > start and nums[i] == nums[i-1]:
+                    continue
                 curr.append(nums[i])
                 bt(i + 1)
                 curr.pop()
