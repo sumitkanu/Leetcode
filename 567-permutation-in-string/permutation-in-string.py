@@ -4,23 +4,22 @@ class Solution:
             return False
 
         s1c = [0] * 26
+        s2c = [0] * 26
 
         for i in range(len(s1)):
             s1c[ord(s1[i]) - ord("a")] += 1
+            s2c[ord(s2[i]) - ord("a")] += 1
 
-        def compare(s1c, s2c):
-            for i in range(26):
-                if s1c[i] != s2c[i]:
-                    return False
+        if s1c == s2c:
             return True
 
-        for i in range(len(s2) - len(s1) + 1):
-            s2c = [0] * 26
+        left = 0
+        for right in range(len(s1), len(s2)):
+            s2c[ord(s2[right]) - ord("a")] += 1
+            s2c[ord(s2[left]) - ord("a")] -= 1
+            left += 1
 
-            for j in range(len(s1)):
-                s2c[ord(s2[i + j]) - ord("a")] += 1
-
-            if compare(s1c, s2c):
+            if s1c == s2c:
                 return True
 
         return False
