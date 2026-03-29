@@ -4,7 +4,7 @@ class Solution:
 
         def bt(curr, rem):
             if len(rem) == 0:
-                res.append(curr[:])
+                res.append(curr)
                 return
 
             for i in range(len(rem)):
