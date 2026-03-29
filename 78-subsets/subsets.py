@@ -1,18 +1,18 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        self.res = []
-        self.curr = []
+        res = []
+        curr = []
 
         def bt(idx):
-            self.res.append(self.curr[:])
+            res.append(curr[:])
 
             if idx == len(nums):
                 return
 
             for i in range(idx, len(nums)):
-                self.curr.append(nums[i])
+                curr.append(nums[i])
                 bt(i + 1)
-                self.curr.pop()
+                curr.pop()
 
         bt(0)
-        return self.res
+        return res
