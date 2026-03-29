@@ -1,16 +1,18 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        ans = []
+        res = []
+        curr = []
 
-        def bt(start):
-            if start == len(nums) - 1:
-                ans.append(nums[:])
+        def bt(idx):
+            if idx == len(nums):
+                res.append(curr[:])
                 return
-
-            for i in range(start, len(nums)):
-                nums[start], nums[i] = nums[i], nums[start]
-                bt(start + 1)
-                nums[start], nums[i] = nums[i], nums[start]
-
+            
+            for num in nums:
+                if num not in curr:
+                    curr.append(num)
+                    bt(idx + 1)
+                    curr.pop()
+        
         bt(0)
-        return ans
+        return res
