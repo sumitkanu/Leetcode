@@ -10,7 +10,7 @@ class Solution:
 
             for i in range(idx, len(nums)):
                 curr.append(nums[i])
-                bt(i + 1, curr[:])
+                bt(i + 1, curr)
                 curr.pop()
 
         bt(0, [])
