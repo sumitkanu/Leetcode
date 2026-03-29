@@ -1,15 +1,17 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        res = []
-        sub = []
+        self.res = []
 
-        def backtrack(start: int):
-            res.append(sub[:])  # record current subset (copy!)
+        def bt(idx, curr):
+            self.res.append(curr)
 
-            for i in range(start, len(nums)):
-                sub.append(nums[i])     # choose
-                backtrack(i + 1)        # explore
-                sub.pop()               # undo
+            if idx == len(nums):
+                return
 
-        backtrack(0)
-        return res
+            for i in range(idx, len(nums)):
+                curr.append(nums[i])
+                bt(i + 1, curr[:])
+                curr.pop()
+
+        bt(0, [])
+        return self.res
