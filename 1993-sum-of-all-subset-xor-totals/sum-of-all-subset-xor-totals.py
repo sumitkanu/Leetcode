@@ -2,18 +2,14 @@ class Solution:
     def subsetXORSum(self, nums: List[int]) -> int:
         self.tot = 0
 
-        def bt(idx, curr, xor):
-            if curr:
-                xor = xor ^ curr[-1]
-                self.tot += xor
-
+        def bt(idx, xor):
             if idx == len(nums):
+                self.tot += xor
                 return
 
-            for i in range(idx, len(nums)):
-                curr.append(nums[i])
-                bt(i + 1, curr[:], xor)
-                curr.pop()
+            bt(idx + 1, xor)
+            
+            bt(idx + 1, xor ^ nums[idx])
 
-        bt(0, [], 0)
+        bt(0, 0)
         return self.tot
