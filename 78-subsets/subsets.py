@@ -3,7 +3,7 @@ class Solution:
         self.res = []
 
         def bt(idx, curr):
-            self.res.append(curr)
+            self.res.append(curr[:])
 
             if idx == len(nums):
                 return
