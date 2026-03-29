@@ -1,6 +1,21 @@
 class Solution:
     def subsetXORSum(self, nums: List[int]) -> int:
-        or_all = 0
-        for x in nums:
-            or_all |= x
-        return or_all * (1 << (len(nums) - 1))
+        self.tot = 0
+
+        def bt(idx, curr):
+            xor = 0
+            for num in curr:
+                xor = xor ^ num
+
+            self.tot += xor
+
+            if idx == len(nums):
+                return
+
+            for i in range(idx, len(nums)):
+                curr.append(nums[i])
+                bt(i + 1, curr[:])
+                curr.pop()
+            
+        bt(0, [])
+        return self.tot
