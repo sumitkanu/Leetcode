@@ -4,21 +4,38 @@ class Solution:
             return False
 
         s1_freq = [0] * 26
-        s2_freq = [0] * 26
+        window_freq = [0] * 26
 
         for char in s1:
             s1_freq[ord(char) - ord('a')] += 1
 
-        idx = 0
-        while idx < len(s1):
-            s2_freq[ord(s2[idx]) - ord('a')] += 1
-            idx += 1
+        for i in range(len(s1)):
+            window_freq[ord(s2[i]) - ord('a')] += 1
 
+        matches = 0
+        for i in range(26):
+            if s1_freq[i] == window_freq[i]:
+                matches += 1
+
+        l = 0
         for i in range(len(s1), len(s2)):
-            if s1_freq == s2_freq:
+            if matches == 26:
                 return True
             
-            s2_freq[ord(s2[i - len(s1)]) - ord('a')] -= 1
-            s2_freq[ord(s2[i]) - ord('a')] += 1
+            idx = ord(s2[i]) - ord('a')
+            window_freq[idx] += 1
+            if window_freq[idx] == s1_freq[idx]:
+                matches += 1
+            elif window_freq[idx] == s1_freq[idx] + 1:
+                matches -= 1
+            
+            idx = ord(s2[l]) - ord('a')
+            window_freq[idx] -= 1
+            if window_freq[idx] == s1_freq[idx]:
+                matches += 1
+            elif window_freq[idx] == s1_freq[idx] - 1:
+                matches -= 1
+
+            l += 1
         
-        return s1_freq == s2_freq
+        return matches == 26
