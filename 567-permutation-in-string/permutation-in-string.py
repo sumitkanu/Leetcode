@@ -3,23 +3,22 @@ class Solution:
         if len(s1) > len(s2):
             return False
 
-        s1c = [0] * 26
-        s2c = [0] * 26
+        s1_freq = [0] * 26
+        s2_freq = [0] * 26
 
-        for i in range(len(s1)):
-            s1c[ord(s1[i]) - ord("a")] += 1
-            s2c[ord(s2[i]) - ord("a")] += 1
+        for char in s1:
+            s1_freq[ord(char) - ord('a')] += 1
 
-        if s1c == s2c:
-            return True
+        idx = 0
+        while idx < len(s1):
+            s2_freq[ord(s2[idx]) - ord('a')] += 1
+            idx += 1
 
-        left = 0
-        for right in range(len(s1), len(s2)):
-            s2c[ord(s2[right]) - ord("a")] += 1
-            s2c[ord(s2[left]) - ord("a")] -= 1
-            left += 1
-
-            if s1c == s2c:
+        for i in range(len(s1), len(s2)):
+            if s1_freq == s2_freq:
                 return True
-
-        return False
+            
+            s2_freq[ord(s2[i - len(s1)]) - ord('a')] -= 1
+            s2_freq[ord(s2[i]) - ord('a')] += 1
+        
+        return s1_freq == s2_freq
