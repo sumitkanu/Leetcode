@@ -2,18 +2,15 @@ class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
         ans = []
 
-        def bt(curr_string, left_count, right_count):
-            if len(curr_string) == 2 * n:
-                ans.append("".join(curr_string))
+        def bt(string, left, right):
+            if len(string) == 2 * n:
+                ans.append(string)
                 return
-            if left_count < n:
-                curr_string.append("(")
-                bt(curr_string, left_count + 1, right_count)
-                curr_string.pop()
-            if right_count < left_count:
-                curr_string.append(")")
-                bt(curr_string, left_count, right_count + 1)
-                curr_string.pop()
 
-        bt([], 0, 0)
+            if left < n:
+                bt(string + '(', left + 1, right)
+            if right < left:
+                bt(string + ')', left, right + 1)
+
+        bt("", 0, 0)
         return ans
