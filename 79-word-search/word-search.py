@@ -1,34 +1,35 @@
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
-        rows, cols = len(board), len(board[0])
+        rows = len(board)
+        cols = len(board[0])
 
-        def bt(idx, row, col):
+        def bt(idx, r, c):
             if idx == len(word):
                 return True
 
-            if row < 0 or row >= rows or col < 0 or col >= cols:
+            if r < 0 or r >= rows or c < 0 or c >= cols:
                 return False
 
-            if board[row][col] != word[idx]:
+            if word[idx] != board[r][c]:
                 return False
 
-            temp = board[row][col]
-            board[row][col] = "#"
+            temp = board[r][c]
+            board[r][c] = "#"
 
             found = (
-                bt(idx + 1, row + 1, col) or
-                bt(idx + 1, row - 1, col) or
-                bt(idx + 1, row, col + 1) or
-                bt(idx + 1, row, col - 1)
+                bt(idx + 1, r - 1, c) or
+                bt(idx + 1, r + 1, c) or
+                bt(idx + 1, r, c - 1) or
+                bt(idx + 1, r, c + 1)
             )
 
-            board[row][col] = temp
+            board[r][c] = temp
 
             return found
-
-        for i in range(rows):
-            for j in range(cols):
-                if bt(0, i, j):
+        
+        for r in range(rows):
+            for c in range(cols):
+                if bt(0, r, c):
                     return True
-
+        
         return False
