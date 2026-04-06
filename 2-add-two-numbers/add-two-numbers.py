@@ -15,15 +15,17 @@ class Solution:
             carry = val // 10
             l1 = l1.next
             l2 = l2.next
-        
+
+        if l2:
+            prev.next = l2
+
         while l2:
             val = l2.val + carry
             l2.val = val % 10
             carry = val // 10
-            prev.next = l2
             prev = l2
             l2 = l2.next
-        
+
         while l1:
             val = l1.val + carry
             l1.val = val % 10
