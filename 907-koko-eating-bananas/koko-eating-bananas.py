@@ -1,21 +1,20 @@
 class Solution:
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
-        def eat_time(x):
-            time = 0
+        def isValid(k):
+            tot = 0
             for pile in piles:
-                time += ceil(pile / x)
-
-            return True if time <= h else False
+                tot += ceil(pile/k)
+            
+            return tot <= h
         
-        end = max(piles)
-        start = 1
+        l, r = 1, max(piles)
 
-        while(start <= end):
-            mid = (start + end) // 2
+        while l <= r:
+            mid = (l + r) // 2
 
-            if eat_time(mid):
-                end = mid - 1
+            if isValid(mid):
+                r = mid - 1
             else:
-                start = mid + 1
-        
-        return start
+                l = mid + 1
+
+        return l
