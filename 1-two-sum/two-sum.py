@@ -3,7 +3,9 @@ class Solution:
         seen = {}
 
         for i, num in enumerate(nums):
-            if target - num not in seen.keys():
+            if target - num not in seen:
                 seen[num] = i
             else:
                 return [seen[target - num], i]
+        
+        return []
