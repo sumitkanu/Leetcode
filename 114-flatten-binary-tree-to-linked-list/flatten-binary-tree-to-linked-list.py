@@ -9,31 +9,21 @@ class Solution:
         """
         Do not return anything, modify root in-place instead.
         """
-        def findLast(root):
-            while root:
-                if root.right:
-                    root = root.right
-                    continue
-                elif root.left:
-                    root = root.left
-                    continue
-                return root
+        curr = root
 
+        while curr:
+            if curr.left:
+                # Find the rightmost node of the left subtree
+                predecessor = curr.left
+                while predecessor.right:
+                    predecessor = predecessor.right
 
+                # Attach original right subtree after left subtree
+                predecessor.right = curr.right
 
-        while root:
-            right = root.right
+                # Move left subtree to right
+                curr.right = curr.left
+                curr.left = None
 
-            if root.left:
-                root.right = root.left
-                root.left = None
-            else:
-                root = root.right
-                continue
-            
-            if root.right:
-                last = findLast(root.right)
-                if last:
-                    last.right = right
-
-            root = root.right
+            # Move forward in the flattened chain
+            curr = curr.right
