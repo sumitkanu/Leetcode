@@ -2,7 +2,6 @@ class Solution:
     def countAndSay(self, n: int) -> str:
         ans = "1"
         for num in range(2, n + 1):
-            print(ans)
             temp = ""
             curr = ans[0]
             count = 0
