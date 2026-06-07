@@ -10,9 +10,11 @@ class Solution:
 
         size = 0
         curr_node = head
+        prev = None
 
         while curr_node:
             size += 1
+            prev = curr_node
             curr_node = curr_node.next
 
         k = k % size
@@ -20,14 +22,11 @@ class Solution:
         curr_node = head
         for _ in range(size - k - 1):
             curr_node = curr_node.next
-        
+
         new_head = curr_node.next if curr_node.next else head
         new_tail = curr_node
-        
-        while curr_node.next:
-            curr_node = curr_node.next
 
-        curr_node.next = head
+        prev.next = head
         new_tail.next = None
 
         return new_head
