@@ -19,10 +19,8 @@ class Solution:
         if k == 0:
             return head
 
-        # Make the list circular
         tail.next = head
 
-        # New tail is at position length - k - 1 from the original head
         steps_to_new_tail = length - k - 1
         new_tail = head
 
